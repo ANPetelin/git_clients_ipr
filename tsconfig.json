@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["node_modules/@types"],
+    "types": [ "jest" ],
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "esModuleInterop": false,
+    "noEmit": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/services/*"],
+      "@assets/*": ["assets/*"],
+      "@packages/*": ["src/packages/*"]
+    }
+  },
+  "include": ["src", "config/**/*", "src/components", "src/custom.d.ts", "config"],
+  "exclude": ["node_modules"],
+  "files": ["custom.d.ts"],
+}
