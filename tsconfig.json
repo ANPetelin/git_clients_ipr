@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "typeRoots": ["node_modules/@types"],
-    "types": [ "jest" ],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react-jsx",
@@ -31,6 +31,6 @@
     }
   },
   "include": ["src", "config/**/*", "src/components", "src/custom.d.ts", "config"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/**/*.test.ts"],
   "files": ["custom.d.ts"],
 }
