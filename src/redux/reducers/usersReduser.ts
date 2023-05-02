@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL, LOCATION_POSTFIX } from './consts';
 import { hideLoader, showLoader } from './loaderReduser';
 
-interface IUsers {
+export interface IUsers {
   id: number;
   login: string;
   avatar_url: string;
