@@ -25,12 +25,10 @@
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
-      "*": ["src/services/*"],
-      "@assets/*": ["assets/*"],
-      "@packages/*": ["src/packages/*"]
+      "src": ["src/*"]
     }
   },
-  "include": ["src", "config/**/*", "src/components", "src/custom.d.ts", "config"],
+  "include": ["src", "config/**/*", "src/components", "src/custom.d.ts", "config", "types"],
   "exclude": ["node_modules", "src/**/*.test.ts"],
   "files": ["custom.d.ts"],
 }

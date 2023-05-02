@@ -9,7 +9,7 @@ describe('App', () => {
     expect(screen.getByRole('button')).toHaveTextContent('TEST_FETCH');
   });
 
-  test('Второй тест', () => {
+  it('Второй тест', () => {
     expect(screen.getByText(/learn react/i)).toBeInTheDocument();
   })
 });
