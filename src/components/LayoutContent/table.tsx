@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 
-import { getLoader, selectUsers } from '../redux/selectors';
+import { getLoader, selectUsers } from '../../redux/selectors';
 import { LoadingOutlined } from '@ant-design/icons';
 import Table from 'antd/es/table';
-import { IUsers } from '../redux/reducers/usersReduser';
+import { IUsers } from '../../redux/reducers/usersReduser';
 import { useMemo } from 'react';
 import { Pagination } from 'antd';
 
@@ -62,17 +62,21 @@ export const TableContainer = () => {
 
   return (
     <div
-      className='h-[calc(100vh_-_65px)] m-8 p-4 flex flex-col overfow-x-hidden overflow-y-auto bg-white rounded-3xl scroll-smooth'
+      className='h-[calc(100vh_-_65px)] m-8 p-4 flex flex-col justify-between bg-white rounded-3xl'
     >
-      <Table
-        loading={loader}
-        bordered
-        columns={columns}
-        dataSource={users}
-        onChange={onChange}
-        pagination={false}
-      />
-      <Pagination className='mt-2' onChange={onChangePagination} showLessItems hideOnSinglePage total={234} showSizeChanger showTotal={(total) => `Всего записей ${total}`} />
+      <div className='table-container h-[calc(100vh_-_65px_-_2.5rem)] overfow-x-hidden overflow-y-auto scroll-smooth bg-scroll border-[1px]'>
+        <Table
+          loading={loader}
+          bordered
+          columns={columns}
+          dataSource={users}
+          onChange={onChange}
+          pagination={false}
+        />
+      </div>
+      <div className='h-10 p-2 pb-10 flex justify-end border-[1px] border-t-0'>
+        <Pagination onChange={onChangePagination} showLessItems hideOnSinglePage total={234} showSizeChanger showTotal={(total) => `Всего записей ${total}`} />
+      </div>
     </div>
   );
 };

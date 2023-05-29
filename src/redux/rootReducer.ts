@@ -4,10 +4,12 @@ import type { PreloadedState } from '@reduxjs/toolkit'
 import { loaderReducer } from './reducers/loaderReduser';
 import { usersReducer } from './reducers/usersReduser';
 import { StateModel } from './store';
+import { sliderReducer } from './reducers/sliderReduser';
 
 export const rootReducer = combineReducers({
   loader: loaderReducer,
   users: usersReducer,
+  slider: sliderReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<StateModel>) => {

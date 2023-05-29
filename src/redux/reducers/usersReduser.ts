@@ -28,7 +28,7 @@ export const fetchUsers = createAsyncThunk<{ items: IUsers[] }, string | undefin
   'fetchUsers',
   async function (params = '', { rejectWithValue, dispatch }) {
     dispatch(showLoader());
-    const response = await fetch(`${BASE_URL}?q=${params}${LOCATION_POSTFIX}`);
+    const response = await fetch(`${BASE_URL}?q=${params}${LOCATION_POSTFIX}&page=5&per_page=52`);
     if (!response.ok) {
       return rejectWithValue('Ошибка в запросе юсеров');
     }
