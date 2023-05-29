@@ -10,10 +10,6 @@ export const MainContentSlider = memo(() => {
   const fields = useSelector(getSliderFields);
   const dispatch = useDispatch<DispatchType>();
 
-  console.log({
-    fields,
-  });
-
   const changeField = useCallback(
     (newValue: ChangeFieldPayload) => {
       dispatch(changeFieldValues(newValue));

@@ -26,6 +26,7 @@
     ],
     "rules": {
       "import/no-unresolved": "off",
+      "import/named": "off",
       "@typescript-eslint/ban-ts-comment": [
         "error",
         {"ts-ignore": "allow-with-description"}

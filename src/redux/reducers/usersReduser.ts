@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL, LOCATION_POSTFIX } from './consts';
 import { hideLoader, showLoader } from './loaderReduser';
+import { StateModel } from 'src/redux/store';
 
 export interface IUsers {
   id: number;
@@ -24,11 +25,21 @@ export interface IUsers {
   url: string;
 }
 
-export const fetchUsers = createAsyncThunk<{ items: IUsers[] }, string | undefined, { rejectValue: string }>(
+interface FetchUsersData {
+  items: IUsers[];
+  total_count: number;
+}
+
+export const fetchUsers = createAsyncThunk<FetchUsersData, string | undefined, { rejectValue: string, state: StateModel }>(
   'fetchUsers',
-  async function (params = '', { rejectWithValue, dispatch }) {
+  async function (params = '', { rejectWithValue, dispatch, getState }) {
+    const state = getState();
+    const { page, pageSize, sorter: { order, field } } = state.sortPagination;
+
+    const sort = order ? `+sort:${field}-${order.includes('asc') ? 'asc' : 'desc'}` : '';
+    
     dispatch(showLoader());
-    const response = await fetch(`${BASE_URL}?q=${params}${LOCATION_POSTFIX}&page=5&per_page=52`);
+    const response = await fetch(`${BASE_URL}?q=${params}${LOCATION_POSTFIX}${sort}&page=${page}&per_page=${pageSize}`);
     if (!response.ok) {
       return rejectWithValue('Ошибка в запросе юсеров');
     }
@@ -41,24 +52,17 @@ export const fetchUsers = createAsyncThunk<{ items: IUsers[] }, string | undefin
 const usersSlice = createSlice({
   name: 'user',
   initialState: {
-    users: [] as IUsers[],
+    items: [] as IUsers[],
+    totalCountUser: 0,
   },
-  reducers: {
-    setUsers(state) {
-      state.users = [];
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, () => {
-        showLoader();
-      })
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        hideLoader();
-        state.users = action.payload.items;
+        state.items = action.payload.items;
+        state.totalCountUser = action.payload.total_count;
       });
   },
 });
 
-export const { setUsers } = usersSlice.actions;
 export const { reducer: usersReducer } = usersSlice;
