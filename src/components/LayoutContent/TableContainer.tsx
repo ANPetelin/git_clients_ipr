@@ -12,6 +12,8 @@ import { columns, loaderIcon } from './consts';
 
 import type { TableProps } from 'antd/es/table';
 
+import './index.css';
+
 export const TableContainer = () => {
   const loading = useSelector(getLoader);
   const users = useSelector(selectUsers);
@@ -36,7 +38,7 @@ export const TableContainer = () => {
   );
 
   return (
-    <div className="table-container h-[calc(100vh_-_65px_-_2.5rem)] overfow-x-hidden overflow-y-auto scroll-smooth bg-scroll border-[1px]">
+    <div className="table-container h-[calc(100vh_-_65px_-_2.5rem)] overfow-x-hidden overflow-y-auto scroll-smooth bg-scroll border-[1px] rounded-t-lg">
       <Table loading={loader} bordered columns={columns} dataSource={users} onChange={onChangeSort} pagination={false} />
     </div>
   );
