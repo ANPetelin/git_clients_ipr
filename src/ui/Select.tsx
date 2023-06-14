@@ -25,7 +25,7 @@ const mockOptions = [
     value: '2',
     label: 'test2',
   },
-]
+];
 
 export const UiSelect = ({ label, onChange, fieldKey, value, options }: SelectProps) => {
   const SelectChange = useCallback((value: string) => {

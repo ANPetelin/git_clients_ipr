@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface ISliderFields {
+export interface ISliderFields {
   node_id?: string;
   login?: string;
   score?: string;

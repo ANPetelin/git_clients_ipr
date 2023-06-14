@@ -1,26 +1,25 @@
-import { LoadingOutlined } from '@ant-design/icons';
-
 import { IUsers } from 'src/redux/reducers/usersReduser';
 
 import type { ColumnsType } from 'antd/es/table';
+import { SorterResult } from 'antd/es/table/interface';
 
-export const loaderIcon = <LoadingOutlined style={{ fontSize: 50, marginTop: 200 }} spin />;
-
-export const columns: ColumnsType<IUsers> = [
+export const getColumns = (sorter: Pick<SorterResult<IUsers>, "field" | "order">):ColumnsType<IUsers> => [
   {
     title: 'Код',
     dataIndex: 'node_id',
-    defaultSortOrder: 'ascend',
+    sortOrder: sorter.field === 'node_id' ? sorter.order : undefined,
     sorter: true,
   },
   {
-    title: 'Наименование',
+    title: 'Логин',
     dataIndex: 'login',
+    sortOrder: sorter.field === 'login' ? sorter.order : undefined,
     sorter: true,
   },
   {
     title: 'Тип роли',
     dataIndex: 'score',
+    sortOrder: sorter.field === 'score' ? sorter.order : undefined,
     sorter: true,
   },
   {

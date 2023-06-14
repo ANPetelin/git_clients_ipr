@@ -6,12 +6,14 @@ import { usersReducer } from './reducers/usersReduser';
 import { StateModel } from './store';
 import { sliderReducer } from './reducers/sliderReduser';
 import { sortPaginationReducer } from './reducers/sortPaginationReduser';
+import { selectUserReducer } from './reducers/selectUserReduser';
 
 export const rootReducer = combineReducers({
   loader: loaderReducer,
   users: usersReducer,
   slider: sliderReducer,
   sortPagination: sortPaginationReducer,
+  selectedUser: selectUserReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<StateModel>) => {

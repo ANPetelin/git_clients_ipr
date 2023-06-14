@@ -1,9 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, SerializedError } from '@reduxjs/toolkit';
 import { BASE_URL, LOCATION_POSTFIX } from './consts';
 import { hideLoader, showLoader } from './loaderReduser';
 import { StateModel } from 'src/redux/store';
 
 export interface IUsers {
+  key: number;
   id: number;
   login: string;
   avatar_url: string;
@@ -28,19 +29,27 @@ export interface IUsers {
 interface FetchUsersData {
   items: IUsers[];
   total_count: number;
+  error: SerializedError | null;
+  
 }
 
-export const fetchUsers = createAsyncThunk<FetchUsersData, string | undefined, { rejectValue: string, state: StateModel }>(
+export const fetchUsers = createAsyncThunk<FetchUsersData, undefined, { rejectValue: string, state: StateModel }>(
   'fetchUsers',
-  async function (params = '', { rejectWithValue, dispatch, getState }) {
-    const state = getState();
-    const { page, pageSize, sorter: { order, field } } = state.sortPagination;
+  async function (_, { rejectWithValue, dispatch, getState }) {
+    const {
+      sortPagination: { page, pageSize, sorter: { order, field } },
+      slider: { fields: { login, type } },
+    } = getState();
+    const queryLogin = login ? `user:${login} ` : '';
+    const queryType = type ? `type:${type} ` : '';
+    const params = queryType ? `${queryLogin}${queryType}&type=Users` : '';
 
     const sort = order ? `+sort:${field}-${order.includes('asc') ? 'asc' : 'desc'}` : '';
     
     dispatch(showLoader());
     const response = await fetch(`${BASE_URL}?q=${params}${LOCATION_POSTFIX}${sort}&page=${page}&per_page=${pageSize}`);
     if (!response.ok) {
+      dispatch(hideLoader());
       return rejectWithValue('Ошибка в запросе юсеров');
     }
     const data = await response.json();
@@ -53,14 +62,18 @@ const usersSlice = createSlice({
   name: 'user',
   initialState: {
     items: [] as IUsers[],
-    totalCountUser: 0,
-  },
+    total_count: 0,
+    error: null,
+  } as FetchUsersData,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.items = action.payload.items;
-        state.totalCountUser = action.payload.total_count;
+        state.items = action.payload.items.map((item) => ({ ...item, key: item.id }));
+        state.total_count = action.payload.total_count;
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.error = action.error
       });
   },
 });
