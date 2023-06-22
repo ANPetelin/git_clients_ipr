@@ -8,7 +8,7 @@ import { getLoader } from 'src/redux/selectors';
 import { LayoutContent } from './LayoutContent';
 import { SliderWrapper } from './Slider';
 import { ErrorContainer } from './ErrorContainer';
-import { UserModalContainer } from './SelectedUser/UserModalContainer';
+import { UserModal } from './SelectedUser/UserModal';
 
 export function MainContent() {
   const loading = useSelector(getLoader);
@@ -23,7 +23,7 @@ export function MainContent() {
         <LayoutContent />
       </Layout>
       <ErrorContainer />
-      <UserModalContainer />
+      <UserModal />
     </div>
   );
 }

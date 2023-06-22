@@ -51,8 +51,6 @@ export const UserModalContent = ({ selectedUser }: UserModalContentProps) => {
     })();
   }, [selectedUser]);
 
-  console.log(userData);
-
   return (
     <div>
       <img className="w-36 pb-4" src={selectedUser?.avatar_url} alt="userPhoto" />

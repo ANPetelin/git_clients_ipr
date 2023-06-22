@@ -1,4 +1,4 @@
-import Table from 'antd/es/table';
+import { Table } from 'antd';
 import { FilterValue, SorterResult, TablePaginationConfig } from 'antd/es/table/interface';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

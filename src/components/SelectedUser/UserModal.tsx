@@ -5,7 +5,7 @@ import { getSelectedUser } from 'src/redux/selectors';
 
 import { UserModalContent } from './UserModalContent';
 
-export function UserModalContainer() {
+export function UserModal() {
   const selectedUser = useSelector(getSelectedUser);
   const [open, setOpen] = useState(false);
 
