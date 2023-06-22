@@ -1,12 +1,9 @@
+import { Modal } from 'antd';
+import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getFetchError } from 'src/redux/selectors';
 
-import { Modal } from 'antd';
-import { useSelector } from 'react-redux';
-
-import './index.css';
-import { useCallback, useEffect, useState } from 'react';
-
-export function ErrorContainer() {
+export function useError() {
   const fetchError = useSelector(getFetchError);
   const [open, setOpen] = useState(false);
 
@@ -25,6 +22,4 @@ export function ErrorContainer() {
   useEffect(() => {
     fetchError?.message && info();
   }, [fetchError, info]);
-
-  return null;
 }

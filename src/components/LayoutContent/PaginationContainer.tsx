@@ -5,6 +5,7 @@ import { DispatchType } from 'src/redux/store';
 import { changePagination } from 'src/redux/reducers/sortPaginationReduser';
 import { getSortPaginationData, getTotalCountUser } from 'src/redux/selectors';
 import { fetchUsers } from 'src/redux/reducers/usersReduser';
+import { PAGINATION_DATA } from 'src/consts';
 
 export const PaginationContainer = () => {
   const { page, pageSize } = useSelector(getSortPaginationData);
@@ -14,7 +15,7 @@ export const PaginationContainer = () => {
   const onChangePagination = useCallback((page: number, pageSize: number) => {
     dispatch(changePagination({ page, pageSize }));
     dispatch(fetchUsers());
-    localStorage.setItem('paginationData', JSON.stringify({ page, pageSize }));
+    localStorage.setItem(PAGINATION_DATA, JSON.stringify({ page, pageSize }));
   }, [dispatch]);  
 
   return (

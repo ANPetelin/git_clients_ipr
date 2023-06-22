@@ -6,6 +6,7 @@ import { fetchUsers } from 'src/redux/reducers/usersReduser';
 import { resetPagination } from 'src/redux/reducers/sortPaginationReduser';
 import { getSliderFields } from 'src/redux/selectors';
 import { UiButton } from 'src/ui';
+import { FIELDS_SLIDER_DATA, PAGINATION_DATA } from 'src/consts';
 
 export function FooterSlider() {
   const fields = useSelector(getSliderFields);
@@ -14,8 +15,8 @@ export function FooterSlider() {
   const handleFetchUsers = useCallback(() => {
     dispatch(resetPagination());
     dispatch(fetchUsers());
-    localStorage.setItem('fieldsSliderData', JSON.stringify(fields));
-    localStorage.setItem('paginationData', JSON.stringify({ page: 1, pageSize: 10 }));
+    localStorage.setItem(FIELDS_SLIDER_DATA, JSON.stringify(fields));
+    localStorage.setItem(PAGINATION_DATA, JSON.stringify({ page: 1, pageSize: 10 }));
   }, [dispatch, fields]);
   const handleClickClearButton = useCallback(() => {
     dispatch(clearFieldValues());

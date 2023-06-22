@@ -3,16 +3,16 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getSelectedUser } from 'src/redux/selectors';
 
-import { UserModalContent } from './UserModalContent';
+import { CardUserContent } from './CardUserContent';
 
-export function UserModal() {
+export function CardUser() {
   const selectedUser = useSelector(getSelectedUser);
   const [open, setOpen] = useState(false);
 
   const info = useCallback(() => {
     Modal.info({
       title: "Данные Юсера",
-      content: <UserModalContent selectedUser={selectedUser}/>,
+      content: <CardUserContent selectedUser={selectedUser}/>,
       open,
       onOk() {
         setOpen(false);          

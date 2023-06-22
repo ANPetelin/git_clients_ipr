@@ -1,29 +1,19 @@
-import './index.css';
-
 import { Layout } from 'antd';
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getLoader } from 'src/redux/selectors';
 
 import { LayoutContent } from './LayoutContent';
 import { SliderWrapper } from './Slider';
-import { ErrorContainer } from './ErrorContainer';
-import { UserModal } from './SelectedUser/UserModal';
+import { CardUser } from './SelectedUser/CardUser';
+import { Spinner } from './Spinner';
 
-export function MainContent() {
-  const loading = useSelector(getLoader);
+import './index.css';
 
-  const spinner = useMemo(() => loading ? <div className='lds-dual-ring' onClick={(e) => e.stopPropagation()}/> : null, [loading]);
-
-  return (
-    <div className="App">
-      {spinner}
-      <Layout>
-        <SliderWrapper />
-        <LayoutContent />
-      </Layout>
-      <ErrorContainer />
-      <UserModal />
-    </div>
-  );
-}
+export const MainContent = () => (
+  <div className="App">
+    <Spinner />
+    <Layout>
+      <SliderWrapper />
+      <LayoutContent />
+    </Layout>
+    <CardUser />
+  </div>
+);

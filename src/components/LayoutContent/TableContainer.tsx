@@ -1,17 +1,16 @@
 import { Table } from 'antd';
+import type { TableProps } from 'antd/es/table';
 import { FilterValue, SorterResult, TablePaginationConfig } from 'antd/es/table/interface';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSorter } from 'src/redux/reducers/sortPaginationReduser';
-import { IUsers, fetchUsers } from 'src/redux/reducers/usersReduser';
+import { SORTER_DATA } from 'src/consts';
 import { selectUserAction } from 'src/redux/reducers/selectUserReduser';
-import { selectUsers, getSortPaginationData } from 'src/redux/selectors';
+import { changeSorter } from 'src/redux/reducers/sortPaginationReduser';
+import { fetchUsers, IUsers } from 'src/redux/reducers/usersReduser';
+import { getSortPaginationData, selectUsers } from 'src/redux/selectors';
 import { DispatchType } from 'src/redux/store';
 
 import { getColumns } from './consts';
-
-import type { TableProps } from 'antd/es/table';
-
 import './index.css';
 
 export const TableContainer = () => {
@@ -24,7 +23,7 @@ export const TableContainer = () => {
       if (!Array.isArray(sorter)) {
         dispatch(changeSorter({ sorter }));
         dispatch(fetchUsers());
-        localStorage.setItem('sorterData', JSON.stringify({ sorter }));
+        localStorage.setItem(SORTER_DATA, JSON.stringify({ sorter }));
       }
     },
     [dispatch],
