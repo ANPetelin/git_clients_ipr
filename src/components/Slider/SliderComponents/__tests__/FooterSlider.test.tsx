@@ -6,6 +6,9 @@ describe('FooterSlider test', () => {
   beforeEach(() => renderWithProviders(<FooterSlider />));
 
   test('Наличие кнопки применить', () => {
-    expect(screen.queryByText('Применить')).toBeInTheDocument();
+    expect(screen.getByText('Применить')).toBeInTheDocument();
+  });
+  test('Проверяем количество кнопок', () => {
+    expect(screen.getAllByRole('button')).toHaveLength(2);
   });
 });

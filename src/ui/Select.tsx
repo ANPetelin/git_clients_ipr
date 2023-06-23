@@ -14,6 +14,7 @@ interface SelectProps {
   fieldKey: ISliderFieldsKeys;
   value?: string;
   options?: OptionType[];
+  testId?: string;
 }
 
 const mockOptions = [
@@ -27,14 +28,14 @@ const mockOptions = [
   },
 ];
 
-export const UiSelect = ({ label, onChange, fieldKey, value, options }: SelectProps) => {
+export const UiSelect = ({ label, onChange, fieldKey, value, options, testId }: SelectProps) => {
   const SelectChange = useCallback((value: string) => {
     onChange({ key: fieldKey, value });
   }, [fieldKey, onChange]);
   return (
     <div className='ui-select-container'>
       <p className='text-left text-neutral-400 pb-1'>{label}</p>
-      <Select options={options ?? mockOptions} value={value} size='large' className='text-left w-full rounded-3xl' onChange={SelectChange} />
+      <Select virtual={false} data-testid={testId} options={options ?? mockOptions} value={value} size='large' className='text-left w-full rounded-3xl' onChange={SelectChange} />
     </div>
   );
 };

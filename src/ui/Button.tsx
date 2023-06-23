@@ -7,13 +7,14 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   type?: "text" | "link" | "ghost" | "default" | "primary" | "dashed" | undefined;
+  typeId?: string;
 }
 
-export const UiButton = ({ icon, label, onClick, className, type = 'text' }: ButtonProps) => {
+export const UiButton = ({ icon, label, onClick, className, type = 'text', typeId }: ButtonProps) => {
   const buttonClick = useCallback(() => {
     if (onClick) {
       onClick();
     }
   }, [onClick]);
-  return <Button type={type} className={`flex items-center justify-center ${className}`} onClick={buttonClick} icon={icon}>{label}</Button>;
+  return <Button data-typeid={typeId} type={type} className={`flex items-center justify-center ${className}`} onClick={buttonClick} icon={icon}>{label}</Button>;
 };

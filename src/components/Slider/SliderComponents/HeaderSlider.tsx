@@ -15,7 +15,7 @@ export function HeaderSlider() {
   return (
     <div className='flex items-center justify-between h-14 border-b-2 px-2 font-bold'>
         Фильтры
-        <UiButton onClick={collapseSlider} icon={<LeftOutlined className='text-sky-700' />}/>
+        <UiButton typeId="collapse-button" onClick={collapseSlider} icon={<LeftOutlined className='text-sky-700' />}/>
     </div>
   );
 }

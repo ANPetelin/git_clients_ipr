@@ -15,6 +15,6 @@ export function ExpandSliderButton() {
     }, [dispatch]);
 
   return isVisibleSlider ? null : (
-    <UiButton onClick={expandSlider} icon={<MenuOutlined className="text-sky-700" />} className="absolute top-2 left-3" />
+    <UiButton typeId="expand-slider-button" onClick={expandSlider} icon={<MenuOutlined className="text-sky-700" />} className="absolute top-2 left-3" />
   );
 }

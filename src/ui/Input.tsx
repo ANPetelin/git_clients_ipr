@@ -7,9 +7,10 @@ interface InputProps {
   onChange: (newValue: ChangeFieldPayload) => void;
   fieldKey: ISliderFieldsKeys;
   value?: string;
+  testId?: string;
 }
 
-export const UiInput = ({ label, onChange, fieldKey, value }: InputProps) => {
+export const UiInput = ({ label, onChange, fieldKey, value, testId }: InputProps) => {
     
   const inputChange = useCallback((value: ChangeEvent<HTMLInputElement>) => {
     onChange({ key: fieldKey, value: value.target.value });
@@ -18,7 +19,7 @@ export const UiInput = ({ label, onChange, fieldKey, value }: InputProps) => {
   return (
     <div>
       <p className='text-left text-neutral-400 pb-1'>{label}</p>
-      <Input value={value} className='h-10 rounded-2xl' onChange={inputChange} />
+      <Input data-testid={testId} value={value} className='h-10 rounded-2xl' onChange={inputChange} />
     </div>
   );
 };
